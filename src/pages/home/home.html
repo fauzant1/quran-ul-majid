@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <!-- <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button> -->
+    <ion-title>iQuran</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div style="text-align: center">
+       <ion-grid>
+        <ion-row >
+          <ion-col col-4>
+              <b>Surah No</b>
+          </ion-col>
+          <ion-col  col-4>
+              <b>Surah Name</b>
+            </ion-col>
+            <ion-col col-4>
+                <b>Verses</b>
+              </ion-col>
+        </ion-row>
+      </ion-grid> 
+    </div>
+ 
+    <div style="text-align:center" menuClose ion-item *ngFor="let surah of surahs let i = index" (click)="openSurah(surah,i)">
+      <ion-grid>
+            <ion-row class="quranFont">
+              <ion-col col-4>
+                  {{surah.chapter_number}}
+              </ion-col>
+              <ion-col col-4>
+                  {{surah.name_arabic}}
+                </ion-col>
+                <ion-col col-4>
+                    {{surah.verses_count}}
+                  </ion-col>
+            </ion-row>
+          </ion-grid>   
+        </div> 
+ 
+</ion-content>

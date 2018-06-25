@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{selectedSurah_name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    
+    <ion-grid>
+        <ion-row style="text-align: center !important">
+            <ion-col>
+                    <h3><b><p class="Chaptercircle" style="float: left; margin: 0 !important">{{selectedSurah.chapter_number}}</p></b></h3>
+                    <!-- <h5>{{surah.number}}</h5> -->
+            </ion-col>
+
+            <ion-col col-5>
+                            <h1 class="quranChapter" style="font-size: 40px !important">{{selectedSurah.name_arabic}}</h1>
+                    <!-- <h3><b>{{surah.name}}</b></h3> -->
+            </ion-col>
+
+            <ion-col>
+                    <h3><b> <p class="Chaptercircle" style="float: right ; margin: 0 !important">{{selectedSurah.verses_count}}</p></b></h3>
+                    <!-- <h5>{{surah.numberOfAyahs}}</h5> -->
+                    <!-- <h3><b> <p class="Chaptercircle" style="float: right">{{surah.ayahs.length}}</p></b></h3> -->
+                    
+                   
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="selectedSurah.bismillah_pre">
+        <ion-row style="text-align: center !important">
+            <ion-col>
+                 <h1 class="quranFont">
+                    بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+                   </h1>
+                   <img src={{hr_bismillah}} />
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+
+    <div *ngFor="let verse_i of selectedSurah_verses_infinite" style="padding:5px">
+      <ion-grid style=" direction: rtl; text-align:justify !important" *ngFor="let verse of verse_i">
+        <ion-row>
+          <ion-col>
+            <div class="quranFont" style="line-height: 40px; font-size: 20px ;">
+                <p style="margin:0 !important;">{{verse.text_madani}}</p>
+                <p style="margin:0 !important;" text-left>{{verse.verse_key}}</p>
+            </div>
+             <div  style="line-height: 30px; font-size: 15px ;">
+                <p *ngFor="let trans of verse.translations" style="margin:0 !important; direction: ltr; text-align:justify !important">{{trans.text}}</p>
+                <p style="margin:0 !important;" text-right>{{verse.verse_key}}</p>
+             </div>
+                
+                <img style="margin:0 !important; height: auto;width:100%;" src={{hr_surah}} />
+              <!-- <hr  style="height:1px !important"> -->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <!-- <ion-list *ngFor="let verse_i of selectedSurah_verses_infinite">
+        <ion-item *ngFor="let verse of verse_i" text-right>  
+         <p> {{verse.text_madani}} </p>
+        </ion-item>
+        
+      </ion-list> -->
+     
+      <ion-infinite-scroll *ngIf="page_number<total_surah_pages" distance="10%"  (ionInfinite)="doInfinite(selectedSurahNo,$event)">
+        <ion-infinite-scroll-content>
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+</ion-content>
