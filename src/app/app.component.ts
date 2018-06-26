@@ -17,6 +17,8 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
+  
+
   constructor(public network:Network,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
@@ -36,14 +38,15 @@ export class MyApp {
       //debugger;
       let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
       this.nav.push(NetworkErrorPage);
-        console.log('network was disconnected :-(');
+      
+        console.log(this.network.type);
       });
   //     disconnectSubscription.unsubscribe();
   
   
-  
+
   let connectSubscription = this.network.onConnect().subscribe(() => {
-    console.log('network connected!');
+    console.log(this.network.type);
     this.nav.pop();
     setTimeout(() => {
       if (this.network.type === 'wifi') {
